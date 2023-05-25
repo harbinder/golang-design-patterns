@@ -80,6 +80,69 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Abstract Factory Pattern",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/pattern/creational/abstract-factory",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"pattern",
+										"creational",
+										"abstract-factory"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Object Pool",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/pattern/creational/object-pool",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"pattern",
+										"creational",
+										"object-pool"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Singleton Pattern",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/pattern/creational/singleton",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"pattern",
+										"creational",
+										"singleton"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -92,7 +155,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:3000/pattern/behavioural/template/method",
+									"raw": "http://localhost:3000/pattern/behavioural/template-method",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -101,8 +164,7 @@
 									"path": [
 										"pattern",
 										"behavioural",
-										"template",
-										"method"
+										"template-method"
 									]
 								}
 							},
