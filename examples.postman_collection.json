@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "5861a21a-c5f2-4374-bc19-4b6763712664",
+		"name": "Examples",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17236570",
+		"_collection_link": "https://cxp-team.postman.co/workspace/Team-Workspace~17b968cb-8cfa-485d-8acd-da874b390dcc/collection/17236570-5861a21a-c5f2-4374-bc19-4b6763712664?action=share&creator=17236570&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Design Pattern",
+			"item": [
+				{
+					"name": "Structural",
+					"item": [
+						{
+							"name": "Bridge Pattern",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/pattern/structural/bridge",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"pattern",
+										"structural",
+										"bridge"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Decorator Pattern",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/pattern/structural/decorator",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"pattern",
+										"structural",
+										"decorator"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Creational",
+					"item": [
+						{
+							"name": "Factory Pattern",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/pattern/creational/factory",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"pattern",
+										"creational",
+										"factory"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Behavioural",
+					"item": [
+						{
+							"name": "Template Method",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/pattern/behavioural/template/method",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"pattern",
+										"behavioural",
+										"template",
+										"method"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Struct_In_Struct",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Interface_In_Struct",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
