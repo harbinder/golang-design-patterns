@@ -30,6 +30,7 @@ func main() {
 	app.Get("/pattern/behavioural/template-method", patternBehaviouralTemplateMethod)
 	app.Get("/pattern/behavioural/iterator", patternBehaviouralIterator)
 	app.Get("/array", arrayExamples)
+	app.Get("/slice", sliceExamples)
 
 	// Start server
 	log.Fatal(app.Listen(":3000"))
@@ -211,6 +212,15 @@ func arrayExamples(c *fiber.Ctx) error {
 	types.ArrayDeclaration()
 	types.ArrayIterate()
 	types.ArrayMultiDimention()
+	return c.JSON(map[string]interface{}{"success": true, "error": nil})
+
+}
+
+func sliceExamples(c *fiber.Ctx) error {
+	types.SliceCreation()
+	types.SliceAppend()
+	types.SliceIterate()
+	//types.SliceMultiDimention()
 	return c.JSON(map[string]interface{}{"success": true, "error": nil})
 
 }
