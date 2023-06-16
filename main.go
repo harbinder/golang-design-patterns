@@ -1,14 +1,14 @@
 package main
 
 import (
-	"fmt"
-	"log"
-
 	"examples/channels"
+	types "examples/data-types"
 	"examples/interfaces"
 	"examples/patterns/behavioural"
 	"examples/patterns/creational"
 	"examples/patterns/structural"
+	"fmt"
+	"log"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -23,11 +23,13 @@ func main() {
 	app.Get("/interface", interfaceExamples)
 	app.Get("/pattern/structural/bridge", patternStructuralBridgeExamples)
 	app.Get("/pattern/structural/decorator", patternStructuralDecorator)
-	app.Get("/pattern/behavioural/template-method", patternBehaviouralTemplateMethod)
 	app.Get("/pattern/creational/factory", patternCreationalFactory)
 	app.Get("/pattern/creational/singleton", patternCreationalSingleton)
 	app.Get("/pattern/creational/abstract-factory", patternCreationalAbstractFactory)
 	app.Get("/pattern/creational/object-pool", patternCreationalObjectPool)
+	app.Get("/pattern/behavioural/template-method", patternBehaviouralTemplateMethod)
+	app.Get("/pattern/behavioural/iterator", patternBehaviouralIterator)
+	app.Get("/array", arrayExamples)
 
 	// Start server
 	log.Fatal(app.Listen(":3000"))
@@ -176,11 +178,6 @@ func patternStructuralDecorator(c *fiber.Ctx) error {
 	return c.JSON(map[string]interface{}{"success": true, "error": nil})
 }
 
-func patternBehaviouralTemplateMethod(c *fiber.Ctx) error {
-	behavioural.ExecuteTemplateMethod()
-	return c.JSON(map[string]interface{}{"success": true, "error": nil})
-}
-
 func patternCreationalFactory(c *fiber.Ctx) error {
 	creational.ExecuteFactory()
 	return c.JSON(map[string]interface{}{"success": true, "error": nil})
@@ -198,4 +195,22 @@ func patternCreationalAbstractFactory(c *fiber.Ctx) error {
 func patternCreationalObjectPool(c *fiber.Ctx) error {
 	creational.ExecuteObjectPool()
 	return c.JSON(map[string]interface{}{"success": true, "error": nil})
+}
+
+func patternBehaviouralTemplateMethod(c *fiber.Ctx) error {
+	behavioural.ExecuteTemplateMethod()
+	return c.JSON(map[string]interface{}{"success": true, "error": nil})
+}
+
+func patternBehaviouralIterator(c *fiber.Ctx) error {
+	behavioural.ExecuteIterator()
+	return c.JSON(map[string]interface{}{"success": true, "error": nil})
+}
+
+func arrayExamples(c *fiber.Ctx) error {
+	types.ArrayDeclaration()
+	types.ArrayIterate()
+	types.ArrayMultiDimention()
+	return c.JSON(map[string]interface{}{"success": true, "error": nil})
+
 }
