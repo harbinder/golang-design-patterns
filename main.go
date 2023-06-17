@@ -3,7 +3,7 @@ package main
 import (
 	"examples/channels"
 	types "examples/data-types"
-	"examples/interfaces"
+	"examples/data-types/interfaces"
 	"examples/patterns/behavioural"
 	"examples/patterns/creational"
 	"examples/patterns/structural"
