@@ -3,6 +3,7 @@ package main
 import (
 	"examples/channels"
 	types "examples/data-types"
+	"examples/data-types/channel"
 	"examples/data-types/interfaces"
 	"examples/patterns/behavioural"
 	"examples/patterns/creational"
@@ -19,8 +20,12 @@ func main() {
 
 	// Routes
 	app.Get("/channel", chanExamples)
-	app.Get("/struct", structExamples)
+	app.Get("/channel/basic", chanBasicExamples)
+	app.Get("/struct/basics", structExamples)
 	app.Get("/interface", interfaceExamples)
+	app.Get("/array", arrayExamples)
+	app.Get("/slice", sliceExamples)
+	app.Get("/map", mapExamples)
 	app.Get("/pattern/structural/bridge", patternStructuralBridgeExamples)
 	app.Get("/pattern/structural/decorator", patternStructuralDecorator)
 	app.Get("/pattern/creational/factory", patternCreationalFactory)
@@ -29,14 +34,17 @@ func main() {
 	app.Get("/pattern/creational/object-pool", patternCreationalObjectPool)
 	app.Get("/pattern/behavioural/template-method", patternBehaviouralTemplateMethod)
 	app.Get("/pattern/behavioural/iterator", patternBehaviouralIterator)
-	app.Get("/array", arrayExamples)
-	app.Get("/slice", sliceExamples)
 
 	// Start server
 	log.Fatal(app.Listen(":3000"))
 }
 
 // Handler
+
+func chanBasicExamples(c *fiber.Ctx) error {
+	channel.Basic()
+	return c.SendString("Channel Basics")
+}
 func chanExamples(c *fiber.Ctx) error {
 	gc := channels.GoChannel{}
 	//gc.RoutineOne()
@@ -45,6 +53,11 @@ func chanExamples(c *fiber.Ctx) error {
 }
 
 func interfaceExamples(c *fiber.Ctx) error {
+	interfaces.ExampleInterfaceInStruct()
+	return c.JSON(map[string]interface{}{})
+}
+
+func interfaceExamples1(c *fiber.Ctx) error {
 
 	/*
 		create an object of SportsPerson type
@@ -220,6 +233,15 @@ func sliceExamples(c *fiber.Ctx) error {
 	types.SliceCreation()
 	types.SliceAppend()
 	types.SliceIterate()
+	//types.SliceMultiDimention()
+	return c.JSON(map[string]interface{}{"success": true, "error": nil})
+
+}
+
+func mapExamples(c *fiber.Ctx) error {
+	types.MapCreation()
+	//types.SliceAppend()
+	types.MapIterate()
 	//types.SliceMultiDimention()
 	return c.JSON(map[string]interface{}{"success": true, "error": nil})
 

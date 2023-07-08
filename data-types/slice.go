@@ -34,7 +34,9 @@ There are four ways of creating a slice
 2. Create a slice from Array OR Slice
 The format for creating a new slice by re-slicing an existing array is
 --> [n]sample[start:end]
-The above operation will return a new slice from the array starting from index start to index end-1. So the element at index end is not included in the newly created slice. While re-slicing , both start and end index is optional.
+The above operation will return a new slice from the array starting from index start to index end-1.
+So the element at index end is not included in the newly created slice.
+While re-slicing , both start and end index is optional.
 - The default value of the start index is zero
 - The default value of the end index is the length of the array
 - length of newly created slice = (end–start)
