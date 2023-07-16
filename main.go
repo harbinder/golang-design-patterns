@@ -2,6 +2,8 @@ package main
 
 import (
 	"examples/channels"
+	"examples/data-structure/linklist"
+	"examples/data-structure/stack"
 	types "examples/data-types"
 	"examples/data-types/channel"
 	"examples/data-types/interfaces"
@@ -35,11 +37,30 @@ func main() {
 	app.Get("/pattern/behavioural/template-method", patternBehaviouralTemplateMethod)
 	app.Get("/pattern/behavioural/iterator", patternBehaviouralIterator)
 
+	app.Get("/stack", stackExamples)
+	app.Get("/linklist/single", linklistSingleExamples)
+	app.Get("/linklist/double", linklistDoubleExamples)
+
 	// Start server
 	log.Fatal(app.Listen(":3000"))
 }
 
 // Handler
+
+func stackExamples(c *fiber.Ctx) error {
+	stack.StackExample()
+	return c.SendString("Stack : Slice Implementation")
+}
+
+func linklistSingleExamples(c *fiber.Ctx) error {
+	linklist.LinklistExample()
+	return c.SendString("Linklist : Singly Implementation")
+}
+
+func linklistDoubleExamples(c *fiber.Ctx) error {
+	linklist.DoublyListExample()
+	return c.SendString("Linklist : Doubly Implementation")
+}
 
 func chanBasicExamples(c *fiber.Ctx) error {
 	channel.Basic()
