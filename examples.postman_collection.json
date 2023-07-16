@@ -169,8 +169,182 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Iterator",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/pattern/behavioural/iterator",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"pattern",
+										"behavioural",
+										"iterator"
+									]
+								}
+							},
+							"response": []
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "Data Types",
+			"item": [
+				{
+					"name": "Struct",
+					"item": [
+						{
+							"name": "Basics",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/struct/basics",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"struct",
+										"basics"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Channel",
+					"item": [
+						{
+							"name": "New Request",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Array",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Map",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/map",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"map"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Slice",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/slice",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"slice"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Data Structure",
+			"item": [
+				{
+					"name": "Stack Array",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/stack",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"stack"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Linklist Single",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/linklist/single",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"linklist",
+								"single"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Linklist Double",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/linklist/double",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"linklist",
+								"double"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -186,7 +360,18 @@
 			"name": "Interface_In_Struct",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/interface",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"interface"
+					]
+				}
 			},
 			"response": []
 		}
