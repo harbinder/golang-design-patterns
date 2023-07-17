@@ -4,6 +4,7 @@ import (
 	"examples/channels"
 	"examples/data-structure/linklist"
 	"examples/data-structure/stack"
+	"examples/data-structure/tree"
 	types "examples/data-types"
 	"examples/data-types/channel"
 	"examples/data-types/interfaces"
@@ -40,6 +41,7 @@ func main() {
 	app.Get("/stack", stackExamples)
 	app.Get("/linklist/single", linklistSingleExamples)
 	app.Get("/linklist/double", linklistDoubleExamples)
+	app.Get("/tree/bst", treeBstExamples)
 
 	// Start server
 	log.Fatal(app.Listen(":3000"))
@@ -60,6 +62,11 @@ func linklistSingleExamples(c *fiber.Ctx) error {
 func linklistDoubleExamples(c *fiber.Ctx) error {
 	linklist.DoublyListExample()
 	return c.SendString("Linklist : Doubly Implementation")
+}
+
+func treeBstExamples(c *fiber.Ctx) error {
+	tree.TreeBstExample()
+	return c.SendString("Tree : BST Implementation")
 }
 
 func chanBasicExamples(c *fiber.Ctx) error {

@@ -1,4 +1,4 @@
-BINARY_NAME=examples
+BINARY_NAME=go_examples
 .DEFAULT_GOAL := run
 
 build:
@@ -8,7 +8,7 @@ clean:
 	go clean
 	rm -rf bin
 
-dep: vet
+dep: #vet
 	go mod download
 
 vet:
