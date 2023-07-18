@@ -41,7 +41,8 @@ func main() {
 	app.Get("/stack", stackExamples)
 	app.Get("/linklist/single", linklistSingleExamples)
 	app.Get("/linklist/double", linklistDoubleExamples)
-	app.Get("/tree/bst", treeBstExamples)
+	app.Get("/tree/bst/recursive", treeBstExamples)
+	app.Get("/tree/bst/iterative", treeBstIterativeExamples)
 
 	// Start server
 	log.Fatal(app.Listen(":3000"))
@@ -66,7 +67,12 @@ func linklistDoubleExamples(c *fiber.Ctx) error {
 
 func treeBstExamples(c *fiber.Ctx) error {
 	tree.TreeBstExample()
-	return c.SendString("Tree : BST Implementation")
+	return c.SendString("Tree : BST Recursive Implementation")
+}
+
+func treeBstIterativeExamples(c *fiber.Ctx) error {
+	tree.TreeBstIterativeExample()
+	return c.SendString("Tree : BST Iterative Implementation")
 }
 
 func chanBasicExamples(c *fiber.Ctx) error {
