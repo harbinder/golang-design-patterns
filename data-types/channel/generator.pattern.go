@@ -1,7 +1,9 @@
 package channel
 
 import (
+	"context"
 	"fmt"
+	"time"
 )
 
 /*
@@ -34,25 +36,33 @@ type Response struct {
 /*
 sender will get some input and return a channel, over which input will be sent to consumer
 */
-func (g *Generator) generate() (inputChan chan interface{}) {
+func (g *Generator) generate(ctx context.Context) (inputChan chan interface{}) {
 	inputChan = make(chan interface{})
 	/*
 		Important Point:
 		Input channel declared here will only be returned, if below code is executed separately in another goroutine
 		Else it will wait on sending data to inputChannel  (inputChan <- ip)
 	*/
-	go func() {
+	go func(ctx context.Context) {
 		defer close(inputChan) // close input channel, when all input data sent
 
 		for ip := range g.Input {
-			inputChan <- ip
+			select {
+			case inputChan <- ip:
+				time.Sleep(2 * time.Second) // wait for sometime after sending each input
+				fmt.Println("Generator goroutine: sent input - ", ip)
+			case <-ctx.Done():
+				fmt.Println("Generator goroutine: received cancel event - ", ctx.Err())
+				return
+			}
+
 		}
-	}()
+	}(ctx)
 
 	return
 }
 
-func (g *Generator) consumer(inputChan, outputChan chan interface{}) {
+func (g *Generator) consumer(ctx context.Context, inputChan, outputChan chan interface{}) {
 	// never forget to close channel, that too via sender
 	defer close(outputChan)
 
@@ -73,9 +83,12 @@ func (g *Generator) consumer(inputChan, outputChan chan interface{}) {
 			"input":  ip.(int),
 			"output": isEven,
 		}
-		outputChan <- Response{
-			Output: op,
-			err:    err,
+		select {
+		case outputChan <- Response{Output: op, err: err}:
+			fmt.Println("Consumer goroutine: sends output - ", op)
+		case <-ctx.Done():
+			fmt.Println("Consumer goroutine: received cancel event - ", ctx.Err())
+			return
 		}
 	}
 	return
@@ -87,10 +100,18 @@ func GeneratorPattern() {
 	outputChan := make(chan interface{})
 
 	// initialise input channel, on which sender goroutine will push input data
-	inputChan := g.generate()
+	// WithTimeout() -> will trigger cancel event after speppcific time(6 seconds in this case)
+	ctx, cancel := context.WithTimeout(context.Background(), 6*time.Second)
+
+	//ctx, cancel := context.WithCancel(context.Background())
+	// to trigger cancel event, before both goroutines send all input and output
+	// mock some error and trigger manually
+	defer cancel()
+
+	inputChan := g.generate(ctx)
 
 	// initialise output channel, on which consumer goroutine will  push output after processing
-	go g.consumer(inputChan, outputChan)
+	go g.consumer(ctx, inputChan, outputChan)
 
 	// listen to output channel
 	// handle output & error accordingly
