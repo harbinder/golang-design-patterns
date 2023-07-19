@@ -7,7 +7,9 @@ import (
 )
 
 /*
-Error handliing in goroutines
+Reference: https://betterprogramming.pub/writing-better-code-with-go-concurrency-patterns-9bc5f9f73519
+
+#### Error handling in goroutines
 1. We create a new struct type Result that couples both result and error
 2. In the consumer function, we callDatabase and return both result and error in the Result struct via the resultCh
 3. The main function loops through the resultCh and processes the result and error

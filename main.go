@@ -76,8 +76,10 @@ func treeBstIterativeExamples(c *fiber.Ctx) error {
 }
 
 func chanBasicExamples(c *fiber.Ctx) error {
-	channel.Basic()
-	channel.GeneratorPattern()
+	//channel.Basic()
+	//channel.GeneratorPattern()
+	channel.FanOutFanInPattern()
+	channel.SemaphoreExample()
 	return c.SendString("Channel Basics")
 }
 func chanExamples(c *fiber.Ctx) error {
