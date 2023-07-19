@@ -66,7 +66,7 @@ PS: So sending and receiving in the SAME Goroutine is only possible for a BUFFER
 ch := make(chan {type})
 2. Unidirectional
 ONLY Send To:    ch := make(chan<- {type})
-ONLY Send From: ch := make(<-chan {type})
+ONLY Receive From: ch := make(<-chan {type})
 
 chan     :bidirectional channel (Both read and write)
 chan <-  :only writing to channel
@@ -77,7 +77,7 @@ Close is an inbuilt function that can be used to close a channel.
 Closing of a channel means that no more data can we send to the channel.
 Channel is generally closed when all the data has been sent and there's no more data to be send.
 1. PANIC: Sending on a close channel will cause a panic.
-2. PANIC: Also closing a already closed channel will cause a panic
+2. PANIC: Also closing an already closed channel will cause a panic
 
 While receiving from a  channel we can also use an additional variable to determine if the channel has been closed.
 val, NotClosed := <-ch
@@ -98,7 +98,8 @@ Length	  0	 | Number of elements queued in the buffer of the channel	-0 if unbuf
 Capacity  0	| Size of the buffer of the channel	-0 if unbuffered channel-Size of the buffer if buffered channel |	0
 
 
-
+Pointers:
+1. Channel Must Always Be Closed by the Sender
 
 */
 
@@ -112,9 +113,8 @@ func Basic() {
 		wg.Add(1)
 		go func(i int, ch chan int, wg *sync.WaitGroup) {
 			result += i * 2
-			fmt.Println()
-			fmt.Printf("Result: %v - %v", i, result)
-			//ch <- i
+			fmt.Printf("\nResult: %v - %v", i, result)
+			//ch <- result
 			wg.Done()
 		}(i, ch, wg)
 	}
@@ -136,6 +136,9 @@ func Basic() {
 	fmt.Printf("Result: %v", result)
 
 	checkClosedChan()
+
+	closeChannelViaSender()
+
 }
 
 func checkClosedChan() {
@@ -147,13 +150,15 @@ func checkClosedChan() {
 
 	close(ch)
 	val, open = <-ch
-	fmt.Printf("Val: %d Open: %t\n", val, open)
+	// Read : default data type value, AND false as channel is closed
+	fmt.Printf("Val: %d Close: %t\n", val, open)
 
 	ch1 := make(chan int, 3)
 	ch1 <- 1
 	ch1 <- 2
 	ch1 <- 3
 	// what happens if you don't close a channel in the main function.
+	// goroutine below will leak, it will wait on channel to receive value
 	close(ch1)
 	go func() {
 		fmt.Printf("Range loop a channel\n")
@@ -164,4 +169,35 @@ func checkClosedChan() {
 	}()
 
 	time.Sleep(time.Second * 2)
+}
+
+func closeChannelViaSender() {
+	fmt.Println("Example: Close channel via sender only")
+
+	ch := make(chan int)
+	go senderChannel(ch)
+	var sum int
+	for v := range ch {
+		fmt.Println("Response: ", v)
+		sum += v
+	}
+	fmt.Println("Total Response: ", sum)
+	fmt.Println("Channel closed now")
+}
+
+func senderChannel(ch chan<- int) {
+	wg := sync.WaitGroup{}
+	// spawn 5 goroutines
+	// wait for each to complete
+	// send response of each to calling function
+	// close the  channel in the end
+	for i := 1; i <= 5; i++ {
+		wg.Add(1)
+		go func(i int, wg *sync.WaitGroup) {
+			defer wg.Done()
+			ch <- i * 2
+		}(i, &wg)
+	}
+	wg.Wait()
+	close(ch)
 }
