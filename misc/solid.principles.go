@@ -2,6 +2,7 @@ package misc
 
 /*
 Reference: https://www.youtube.com/watch?v=XI7zep97c-Y
+Refer: For Golang Examples, https://towardsdev.com/golang-solid-principles-fd7bf513874d
 
 SOLID Principles: Rules to follow to write better code
 Advantages of these are:

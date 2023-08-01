@@ -1,6 +1,7 @@
 package misc
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -53,6 +54,7 @@ func (r *Repository) Get() (output interface{}, err error) {
 }
 
 func TestDatabase(t *testing.T) {
+	CleanUpFunc(t)
 	mockDb := &MockDB{
 		GetFunc: func(ip interface{}) (op interface{}, err error) {
 			op = "MockDB"
@@ -85,4 +87,10 @@ func TestDatabase(t *testing.T) {
 		})
 	}
 
+}
+
+func CleanUpFunc(t *testing.T) {
+	t.Cleanup(func() {
+		fmt.Println("Executing cleanup activities!!")
+	})
 }
