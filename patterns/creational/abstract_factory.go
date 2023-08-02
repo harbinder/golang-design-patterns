@@ -74,6 +74,7 @@ func (t *Train) getTrain() (pnr string) {
 }
 
 /*
+struct embedding: Flight & Train
 Concrete types for ixigo/makemytrip bookings - train & flights
 */
 type ixigoFlight struct {

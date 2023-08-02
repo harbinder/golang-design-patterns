@@ -9,7 +9,7 @@ import (
 There are 3 ways yto create an object once
 1. Using init()
 2. Using sync.Mutex struct - Lock/Unlock Methods
-3. Using sync.Once
+3. Using sync.Once struct - Do Method
 */
 type single struct {
 }

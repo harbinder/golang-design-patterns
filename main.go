@@ -8,6 +8,7 @@ import (
 	types "examples/data-types"
 	"examples/data-types/channel"
 	"examples/data-types/interfaces"
+	"examples/misc"
 	"examples/patterns/behavioural"
 	"examples/patterns/creational"
 	"examples/patterns/structural"
@@ -44,11 +45,18 @@ func main() {
 	app.Get("/tree/bst/recursive", treeBstExamples)
 	app.Get("/tree/bst/iterative", treeBstIterativeExamples)
 
+	app.Get("/copy/deep-shallow", copyExamples)
+
 	// Start server
 	log.Fatal(app.Listen(":3000"))
 }
 
 // Handler
+
+func copyExamples(c *fiber.Ctx) error {
+	misc.CopyDeepShallow()
+	return c.SendString("Copy : Deep and Shallow")
+}
 
 func stackExamples(c *fiber.Ctx) error {
 	stack.StackExample()
