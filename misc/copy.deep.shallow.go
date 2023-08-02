@@ -51,4 +51,28 @@ func CopyDeepShallow() {
 	Map_2[1] = "xxx"
 	fmt.Printf("\nMap: %v - %v", Map_1, Map_2)
 
+	/*
+		Caveats to value type assignment.
+		If we assign pointer of any value type, it will point to the same data type
+		Similarly, if we use new() function to crate a new object, it will return pointer to struct and will be equivalent to reference type.
+		Hence, it will create a Shallow coppy for even struct
+	*/
+
+	fmt.Println()
+	fmt.Println("\n\nCaveats: Not Shallow BUT Deep Copy : Struct Type !!!!")
+	fmt.Println("\n1. Pointer to a Struct: Struct_3 := &Struct_2")
+	Struct_3 := &Struct_2
+	Struct_3.name = "Garry"
+	fmt.Printf("\nStruct: %p - %p", &Struct_2, &Struct_3)
+	fmt.Printf("\nStruct: %v - %v", Struct_2, Struct_3)
+
+	fmt.Println("\n2. Using new() function: It returns Pointer to Struct")
+	fmt.Println("\nStruct_4 := new(struct{ name string })")
+	fmt.Println("Struct_5 := Struct_4")
+	Struct_4 := new(struct{ name string })
+	Struct_4.name = "Sherry"
+	Struct_5 := Struct_4 // ideally it should be shallow copy, but as new() returns a pointer, it is a deep copy
+	Struct_5.name = "Marry"
+	fmt.Printf("\nStruct: %p - %p", &Struct_4, &Struct_5)
+	fmt.Printf("\nStruct: %v - %v", Struct_4, Struct_5)
 }
