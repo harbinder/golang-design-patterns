@@ -66,6 +66,7 @@ func CopyDeepShallow() {
 	fmt.Printf("\nStruct: %p - %p", &Struct_2, &Struct_3)
 	fmt.Printf("\nStruct: %v - %v", Struct_2, Struct_3)
 
+	fmt.Println()
 	fmt.Println("\n2. Using new() function: It returns Pointer to Struct")
 	fmt.Println("\nStruct_4 := new(struct{ name string })")
 	fmt.Println("Struct_5 := Struct_4")

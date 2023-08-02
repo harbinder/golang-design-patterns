@@ -85,4 +85,14 @@ func TreeBstIterativeExample() {
 	tree.Find(1)
 	tree.Find(9)
 	tree.Find(0)
+
+	fmt.Println("\nBreadth First Search: Using Queue - (aka: Level Order Traversal)")
+	visitedNode, err := BreadthFirstSearchViaQueue(tree.Root)
+	if err != nil {
+		fmt.Println(err.Error())
+	} else {
+		fmt.Println("LevelOrder Traversal : ", visitedNode)
+
+	}
+
 }

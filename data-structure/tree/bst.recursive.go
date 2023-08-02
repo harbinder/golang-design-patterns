@@ -187,7 +187,18 @@ func TreeBstExample() {
 	tree.traverse(InOrder)
 	tree.traverse(PreOrder)
 	tree.traverse(PostOrder)
+
 	tree.find(1)
 	tree.find(9)
 	tree.find(0)
+
+	fmt.Println("\nBreadth First Search: Using Map - (aka: Level Order Traversal)")
+	visitedNode, err := BreadthFirstSearchViaMap(tree.root)
+	if err != nil {
+		fmt.Println(err.Error())
+	} else {
+		fmt.Println("LevelOrder Traversal : ", visitedNode)
+
+	}
+
 }
