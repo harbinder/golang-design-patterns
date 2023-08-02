@@ -58,7 +58,8 @@ type bstNode struct {
 }
 
 type bst struct {
-	root *bstNode
+	root        *bstNode
+	visitedNode []int //optional: to store traversed nodes
 }
 
 func (t *bst) insert(data int) {
@@ -124,6 +125,8 @@ func (t *bst) findRecursive(node *bstNode, data int) *bstNode {
 func (t *bst) traverse(order string) {
 	fmt.Println("Tree Traversal : ")
 
+	t.visitedNode = []int{} //make([]int, 0)
+
 	switch order {
 	case InOrder:
 		fmt.Println("InOrder")
@@ -143,14 +146,16 @@ func (t *bst) traverse(order string) {
 func (t *bst) inOrder(node *bstNode) {
 	if node != nil {
 		t.inOrder(node.left)
-		fmt.Printf("%v->", node.data)
+		t.visitedNode = append(t.visitedNode, node.data)
+		//fmt.Printf("%v->", node.data)
 		t.inOrder(node.right)
 	}
 }
 
 func (t *bst) preOrder(node *bstNode) {
 	if node != nil {
-		fmt.Printf("%v->", node.data)
+		t.visitedNode = append(t.visitedNode, node.data)
+		//fmt.Printf("%v->", node.data)
 		t.inOrder(node.left)
 		t.inOrder(node.right)
 	}
@@ -160,7 +165,8 @@ func (t *bst) postOrder(node *bstNode) {
 	if node != nil {
 		t.inOrder(node.left)
 		t.inOrder(node.right)
-		fmt.Printf("%v->", node.data)
+		t.visitedNode = append(t.visitedNode, node.data)
+		//fmt.Printf("%v->", node.data)
 	}
 }
 
@@ -185,8 +191,11 @@ func TreeBstExample() {
 		tree.insert(v)
 	}
 	tree.traverse(InOrder)
+	fmt.Println(tree.visitedNode)
 	tree.traverse(PreOrder)
+	fmt.Println(tree.visitedNode)
 	tree.traverse(PostOrder)
+	fmt.Println(tree.visitedNode)
 
 	tree.find(1)
 	tree.find(9)

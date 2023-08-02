@@ -3,6 +3,8 @@ package tree
 import "fmt"
 
 /*
+Reference: https://faun.pub/2-different-ways-to-implement-bfs-in-golang-8399f5d2452d
+
 BFS: Breadth first search (aka Level Order Traversal)
 TO traverse a tree, each level as arow from left to right
                     1
@@ -15,10 +17,14 @@ TO traverse a tree, each level as arow from left to right
 
 BFS : 1,2,3,4,5,6,7
 
-Solution using Queue:
+Solutions:
+1. Implementation using Queue:
 Iterate each element
 Enqueue left & right node elements of that node
 Dequeue the traversed node element into a visited list
+2. Implementation using Map:
+Store level in Key and Value as Slice of tree Nodes
+Iterate map by each key as level
 */
 
 type QueueNode struct {
