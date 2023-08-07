@@ -18,13 +18,18 @@ TO traverse a tree, each level as arow from left to right
 BFS : 1,2,3,4,5,6,7
 
 Solutions:
+
 1. Implementation using Queue:
 Iterate each element
 Enqueue left & right node elements of that node
 Dequeue the traversed node element into a visited list
+
 2. Implementation using Map:
 Store level in Key and Value as Slice of tree Nodes
 Iterate map by each key as level
+
+While storing values in Queue or Map, order needs to be maintained
+InOrder: left to right
 */
 
 type QueueNode struct {
@@ -67,7 +72,7 @@ func BreadthFirstSearchViaQueue(root *BstNode) (visitedNode []interface{}, err e
 }
 
 /*
-Store level in key and value as array having all elements of that level
+Store level in key and value(order left to right) as array having all elements of that level
 */
 func BreadthFirstSearchViaMap(root *bstNode) (visitedNode []interface{}, err error) {
 

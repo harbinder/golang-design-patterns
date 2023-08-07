@@ -116,6 +116,9 @@ func (t *Bst) Traversal(order string) {
 	}
 }
 
+/*
+Depth First Search implementation - using Stack
+*/
 func (t *Bst) inOrder(root *BstNode) (visitedNode []*BstNode) {
 	visitedNode = []*BstNode{} //make([]int, 0)
 
@@ -153,7 +156,7 @@ func TreeBstIterativeExample() {
 	tree.Find(9)
 	tree.Find(0)
 
-	tree.Traversal(InOrder)
+	//tree.Traversal(InOrder)
 
 	fmt.Println("\nBreadth First Search: Using Queue - (aka: Level Order Traversal)")
 	visitedNode, err := BreadthFirstSearchViaQueue(tree.Root)
@@ -161,6 +164,18 @@ func TreeBstIterativeExample() {
 		fmt.Println(err.Error())
 	} else {
 		fmt.Println("LevelOrder Traversal : ", visitedNode)
+
+	}
+
+	fmt.Println("\nDepth First Search: Using Stack - (InOrder Traversal)")
+	visitedNode, err = DepthFirstSearchViaStack(tree.Root)
+	if err != nil {
+		fmt.Println(err.Error())
+	} else {
+		fmt.Println("InOrder Traversal : ")
+		for _, node := range visitedNode {
+			fmt.Printf("->%v", node.(*BstNode).Data)
+		}
 
 	}
 
