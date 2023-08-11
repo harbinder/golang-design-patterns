@@ -3,6 +3,7 @@ package main
 import (
 	"examples/channels"
 	"examples/data-structure/linklist"
+	"examples/data-structure/sort"
 	"examples/data-structure/stack"
 	"examples/data-structure/tree"
 	types "examples/data-types"
@@ -44,6 +45,8 @@ func main() {
 	app.Get("/linklist/double", linklistDoubleExamples)
 	app.Get("/tree/bst/recursive", treeBstExamples)
 	app.Get("/tree/bst/iterative", treeBstIterativeExamples)
+	app.Get("/tree/bst/array", treeViaArrayExamples)
+	app.Get("/sort", sortExamples)
 
 	app.Get("/copy/deep-shallow", copyExamples)
 
@@ -52,6 +55,11 @@ func main() {
 }
 
 // Handler
+
+func sortExamples(c *fiber.Ctx) error {
+	sort.ExampleSort()
+	return c.SendString("Sort : Using Interface Implementation")
+}
 
 func copyExamples(c *fiber.Ctx) error {
 	misc.CopyDeepShallow()
@@ -81,6 +89,11 @@ func treeBstExamples(c *fiber.Ctx) error {
 func treeBstIterativeExamples(c *fiber.Ctx) error {
 	tree.TreeBstIterativeExample()
 	return c.SendString("Tree : BST Iterative Implementation")
+}
+
+func treeViaArrayExamples(c *fiber.Ctx) error {
+	tree.TreeViaArrayExample()
+	return c.SendString("Tree : Array Repreresentation")
 }
 
 func chanBasicExamples(c *fiber.Ctx) error {

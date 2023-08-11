@@ -33,7 +33,7 @@ There are four ways of creating a slice
 
 2. Create a slice from Array OR Slice
 The format for creating a new slice by re-slicing an existing array is
---> [n]sample[start:end]
+--> [n]sample[start_index:end_index-1]
 The above operation will return a new slice from the array starting from index start to index end-1.
 So the element at index end is not included in the newly created slice.
 While re-slicing , both start and end index is optional.
@@ -86,7 +86,8 @@ s = append(s, 4, 5) // append multiple elements
 s2 = append(s2, s...) // append another slice
 
 ############# Copy a slice   ################
-go builtin package provides copy function that can be used to copy a slice. Below is the signature of this function. It takes in two slices dst and src, and copies data from src to dst. It returns the number of elements copied.
+go builtin package provides copy function that can be used to copy a slice. Below is the signature of this function.
+It takes in two slices dst and src, and copies data from src to dst. It returns the number of elements copied.
 
 func copy(dst, src []Type) int
 There are two cases to be considered while using the copy function:

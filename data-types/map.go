@@ -19,7 +19,7 @@ map[key_type]value_type{}
 
 ############## Allowed Key types in a Map ##############
 
-The map key can be any type that is comparable. Some of the comparable types as defined by go specification are
+The map KEY can be any type that is comparable. Some of the comparable types as defined by go specification are
 - boolean
 - numeric
 - string,
@@ -67,8 +67,16 @@ func MapCreation() {
 	m1 := make(map[string]int)
 	m1["a"] = 1
 	m1["b"] = 2
-	fmt.Println(m)
+	fmt.Println(m1)
 	fmt.Println()
+
+	fmt.Println("3. Using var")
+	fmt.Println("var m2 map[string]int")
+	fmt.Println("m2 = m1")
+	var m2 map[string]int
+	m2 = m1
+	fmt.Println(m2)
+
 }
 
 func MapIterate() {
