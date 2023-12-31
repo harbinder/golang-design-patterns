@@ -5,13 +5,16 @@ import "fmt"
 /*
 1. Deep Copy:
 
-Copying is the data itself, creating a new object. The newly created object does not share memory with the original object. The newly created object creates a new memory address in memory, and the value of the original object will not be affected when the new object value is modified. Since the memory address is different, when you release the memory address, you can release it separately.
+Copying the data itself, creating a new object. The newly created object does not share memory with the original object.
+The newly created object creates a new memory address in memory, and the value of the original object will not be affected when the new object value is modified.
+Since the memory address is different, when you release the memory address, you can release it separately.
 
 Data of value type is all deep copy by default, Array, Int, String, Struct, Float, Bool.
 
-2. Shallow Copy:
+2. Shallow/Light Copy:
 
-Copy the data address, only copy the pointer to the object. At this time, the memory address of the new object and the old object is the same, and the old object will change when the new object value is modified. When the memory address is released, the memory address is also released.
+Copy the data address, only copy the pointer to the object. At this time, the memory address of the new object and the old object is the same,
+and the old object will change when the new object value is modified. When the memory address is released, the memory address is also released.
 
 All data of reference type are light copy, Slice and Map by default.
 */
@@ -54,8 +57,8 @@ func CopyDeepShallow() {
 	/*
 		Caveats to value type assignment.
 		If we assign pointer of any value type, it will point to the same data type
-		Similarly, if we use new() function to crate a new object, it will return pointer to struct and will be equivalent to reference type.
-		Hence, it will create a Shallow coppy for even struct
+		Similarly, if we use new() function to create a new object, it will return pointer to struct and will be equivalent to reference type.
+		Hence, it will create a Shallow coppy for even a struct
 	*/
 
 	fmt.Println()

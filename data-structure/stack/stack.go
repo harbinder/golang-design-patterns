@@ -5,11 +5,11 @@ import (
 )
 
 /*
-LIFO : Last Out First In
+LIFO : Last In First Out
 Operations:
 Push - Append to the end of slice
 Pop - Remove from end of the slice
-Len -
+Len - length of slice
 */
 
 type Stack struct {

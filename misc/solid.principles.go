@@ -27,7 +27,7 @@ Each class should be OPEN to be EXTENED but CLOSED to be MODIFIED
 Extending a class will not impact the existing code.
 
 3. Liskov Substitution
-Is a class B is sub-type of class A,
+If a class B is sub-type of class A,
 Then we should be able to REPLACE object of
 Class A with B, without BREAKING the
 Behaviour of the program

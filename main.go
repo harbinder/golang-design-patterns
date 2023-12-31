@@ -9,6 +9,8 @@ import (
 	types "examples/data-types"
 	"examples/data-types/channel"
 	"examples/data-types/interfaces"
+	"examples/data-types/strings"
+	structs "examples/data-types/struct"
 	"examples/misc"
 	"examples/patterns/behavioural"
 	"examples/patterns/creational"
@@ -22,39 +24,50 @@ import (
 func main() {
 	// Fiber instance
 	app := fiber.New()
+	port := "3000"
 
 	// Routes
-	app.Get("/channel", chanExamples)
-	app.Get("/channel/basic", chanBasicExamples)
-	app.Get("/struct/basics", structExamples)
-	app.Get("/interface", interfaceExamples)
-	app.Get("/array", arrayExamples)
-	app.Get("/slice", sliceExamples)
-	app.Get("/map", mapExamples)
-	app.Get("/pattern/structural/bridge", patternStructuralBridgeExamples)
-	app.Get("/pattern/structural/decorator", patternStructuralDecorator)
-	app.Get("/pattern/creational/factory", patternCreationalFactory)
-	app.Get("/pattern/creational/singleton", patternCreationalSingleton)
-	app.Get("/pattern/creational/abstract-factory", patternCreationalAbstractFactory)
-	app.Get("/pattern/creational/object-pool", patternCreationalObjectPool)
-	app.Get("/pattern/behavioural/template-method", patternBehaviouralTemplateMethod)
-	app.Get("/pattern/behavioural/iterator", patternBehaviouralIterator)
+	api := app.Group("golang")
+	api.Get("/channel", chanExamples)
+	api.Get("/channel/basics", chanBasicExamples)
+	api.Get("/struct/basics", structExamples)
+	api.Get("/struct/embedding", embeddingExample)
+	api.Get("/interface", interfaceExamples)
+	api.Get("/string", stringsExamples)
+	api.Get("/array", arrayExamples)
+	api.Get("/slice", sliceExamples)
+	api.Get("/map", mapExamples)
 
-	app.Get("/stack", stackExamples)
-	app.Get("/linklist/single", linklistSingleExamples)
-	app.Get("/linklist/double", linklistDoubleExamples)
-	app.Get("/tree/bst/recursive", treeBstExamples)
-	app.Get("/tree/bst/iterative", treeBstIterativeExamples)
-	app.Get("/tree/bst/array", treeViaArrayExamples)
-	app.Get("/sort", sortExamples)
+	pattern := api.Group("pattern")
+	pattern.Get("/structural/bridge", patternStructuralBridgeExamples)
+	pattern.Get("/structural/decorator", patternStructuralDecorator)
+	pattern.Get("/creational/factory", patternCreationalFactory)
+	pattern.Get("/creational/singleton", patternCreationalSingleton)
+	pattern.Get("/creational/abstract-factory", patternCreationalAbstractFactory)
+	pattern.Get("/creational/object-pool", patternCreationalObjectPool)
+	pattern.Get("/behavioural/template-method", patternBehaviouralTemplateMethod)
+	pattern.Get("/behavioural/iterator", patternBehaviouralIterator)
 
-	app.Get("/copy/deep-shallow", copyExamples)
+	api.Get("/stack", stackExamples)
+	api.Get("/linklist/single", linklistSingleExamples)
+	api.Get("/linklist/double", linklistDoubleExamples)
+	api.Get("/tree/bst/recursive", treeBstExamples)
+	api.Get("/tree/bst/iterative", treeBstIterativeExamples)
+	api.Get("/tree/bst/array", treeViaArrayExamples)
+	api.Get("/sort", sortExamples)
+
+	api.Get("/copy/deep-shallow", copyExamples)
 
 	// Start server
-	log.Fatal(app.Listen(":3000"))
+	log.Fatal(app.Listen(fmt.Sprintf(":%v", port)))
 }
 
 // Handler
+
+func stringsExamples(c *fiber.Ctx) error {
+	strings.LongestSubstring()
+	return c.SendString("Strings: Longest Substring Implementation")
+}
 
 func sortExamples(c *fiber.Ctx) error {
 	sort.ExampleSort()
@@ -219,6 +232,11 @@ func interfaceExamples1(c *fiber.Ctx) error {
 	cr1.PrintCricketer1()
 
 	return c.JSON(map[string]interface{}{})
+}
+
+func embeddingExample(c *fiber.Ctx) error {
+	structs.EmbeddingExample()
+	return c.SendString("Embedding: Structs")
 }
 
 func structExamples(c *fiber.Ctx) error {

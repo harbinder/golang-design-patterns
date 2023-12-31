@@ -15,8 +15,8 @@ Sending on Full Channel will WAIT
 Receiving from EMPTY channel will WAIT
 Sending on Closed Channel  will PANIC
 ch := make(chan bool)
-chan<- (Receive ONLY)
-chan-> (Send ONLY)
+<-chan (Receive ONLY)
+chan<- (Send ONLY)
 
 Select Statement
 select {
@@ -74,7 +74,7 @@ chan <-  :only writing to channel
 
 ### Close a Channel ###
 Close is an inbuilt function that can be used to close a channel.
-Closing of a channel means that no more data can we send to the channel.
+Closing of a channel means that no more data can be send to the channel.
 Channel is generally closed when all the data has been sent and there's no more data to be send.
 1. PANIC: Sending on a close channel will cause a panic.
 2. PANIC: Also closing an already closed channel will cause a panic
@@ -100,7 +100,8 @@ Capacity  0	| Size of the buffer of the channel	-0 if unbuffered channel-Size of
 
 Pointers:
 1. Channel Must Always Be Closed by the Sender
-
+2. We can use  Context package to close channels and return from gorouotines
+3. We can use WaitGroup struct of sync package as well
 */
 
 func Basic() {

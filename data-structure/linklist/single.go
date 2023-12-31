@@ -20,7 +20,7 @@ func InitList() (ll *LinkList) {
 }
 
 func (ll *LinkList) AddFront(data interface{}) {
-	fmt.Println("\nAdd Front")
+	fmt.Println("\nAdd Front - ", data)
 	node := &Node{Data: data}
 	if ll.Head == nil {
 		ll.Head = node
@@ -31,7 +31,7 @@ func (ll *LinkList) AddFront(data interface{}) {
 	ll.Len++
 }
 func (ll *LinkList) AddBack(data interface{}) {
-	fmt.Println("\nAdd Back")
+	fmt.Println("\nAdd Back - ", data)
 	node := &Node{Data: data}
 	ll.Len++
 	if ll.Head == nil { // if list is empty
@@ -49,7 +49,7 @@ func (ll *LinkList) AddBack(data interface{}) {
 	}
 }
 func (ll *LinkList) DeleteFront() (err error) {
-	fmt.Println("\nDelete Front")
+	fmt.Println("Delete Front")
 	if ll.Head == nil {
 		err = fmt.Errorf("List is empty !!")
 		return
@@ -60,7 +60,7 @@ func (ll *LinkList) DeleteFront() (err error) {
 }
 
 func (ll *LinkList) DeleteBack() (err error) {
-	fmt.Println("\nDelete Back")
+	fmt.Println("Delete Back")
 	if ll.Head == nil {
 		err = fmt.Errorf("List is empty !!")
 		return
@@ -89,13 +89,36 @@ func (ll *LinkList) Traverse() (err error) {
 	return
 }
 
+func (ll *LinkList) Reverse() (err error) {
+	fmt.Println("Reverse List")
+	if ll.Head == nil {
+		err = fmt.Errorf("List is empty !!")
+		return
+	}
+
+	prev := ll.Head
+	current := ll.Head.Next
+	next := current.Next
+	for current.Next != nil {
+		current.Next = prev
+		prev = current
+		current = next
+		next = next.Next
+	}
+	current.Next = prev
+	ll.Head.Next = nil
+	ll.Head = current
+
+	return
+}
+
 func LinklistExample() {
 	ll := InitList()
 	if err := ll.Traverse(); err != nil {
 		fmt.Println(err)
 	}
 	ll.AddFront("a")
-	ll.AddFront("b")
+	ll.AddBack("b")
 	ll.AddBack("c")
 	ll.AddBack("d")
 
@@ -109,6 +132,19 @@ func LinklistExample() {
 	}
 	ll.DeleteFront()
 
+	if err := ll.Traverse(); err != nil {
+		fmt.Println(err)
+	}
+
+	ll.AddFront("a")
+	ll.AddBack("d")
+
+	ll.Reverse()
+	if err := ll.Traverse(); err != nil {
+		fmt.Println(err)
+	}
+
+	ll.Reverse()
 	if err := ll.Traverse(); err != nil {
 		fmt.Println(err)
 	}

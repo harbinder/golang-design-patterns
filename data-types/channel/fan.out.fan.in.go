@@ -17,7 +17,7 @@ The most intuitive solution will be to increase the number of workers where work
 This is where the Fan-out, Fan-in pattern comes into play.
 */
 
-func fanOut(doneCh chan struct{}, inputCh chan int) []chan int {
+func fanOutAdd(doneCh chan struct{}, inputCh chan int) []chan int {
 	numWorkers := 5
 	channels := make([]chan int, numWorkers)
 
@@ -39,7 +39,7 @@ func fanOut(doneCh chan struct{}, inputCh chan int) []chan int {
 4. We then return the merged channel — finalCh back to the main function
 5. The chClosure acts as a closure to the ch in each iteration
 */
-func fanIn(doneCh chan struct{}, resultChs ...chan int) chan int {
+func fanInAdd(doneCh chan struct{}, resultChs ...chan int) chan int {
 	finalCh := make(chan int)
 	var wg sync.WaitGroup
 
@@ -86,8 +86,8 @@ func FanOutFanInPattern() {
 
 	// As more goroutines are required to process add() task,
 	// we are using fanOut-fanIn pattern here
-	channels := fanOut(doneCh, inputCh)
-	addResultCh := fanIn(doneCh, channels...)
+	channels := fanOutAdd(doneCh, inputCh)
+	addResultCh := fanInAdd(doneCh, channels...)
 
 	resultCh := multiply(doneCh, addResultCh) // this function present in pipeline.pattern.go file
 

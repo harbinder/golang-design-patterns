@@ -60,7 +60,7 @@ It has method forwarding drawback.
 3. interface in struct
 	Although it is implementing interface
 	However its different in terms of how it implements
-	As we know that by default interfaces are implicit. ie - If any type defines all the methods of an interface, it implemets the interface
+	As we know that by default interfaces are implicit. ie - If any type defines all the methods of an interface, it implements the interface
 	However, in case interface is embedded in struct, all the methods of the interface are already  part of ANY type which implements that interface
 	If required, only required methods can be overridden accordingly
 */

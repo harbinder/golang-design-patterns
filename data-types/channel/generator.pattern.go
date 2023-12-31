@@ -11,7 +11,7 @@ Reference: https://betterprogramming.pub/writing-better-code-with-go-concurrency
 
 #### Error handling in goroutines
 1. We create a new struct type Result that couples both result and error
-2. In the consumer function, we callDatabase and return both result and error in the Result struct via the resultCh
+2. In the consumer function, we call Database and return both result and error in the Result struct via the resultCh
 3. The main function loops through the resultCh and processes the result and error
 
 The errors in a Goroutine should be coupled with its result type and passed back to the main Goroutine that knows the program’s complete state.
@@ -68,7 +68,7 @@ func (g *Generator) consumer(ctx context.Context, inputChan, outputChan chan int
 	// never forget to close channel, that too via sender
 	defer close(outputChan)
 
-	// anonynous function to check even nummber input
+	// anonynous function to check even number input
 	checkEven := func(val int) (isEven bool, err error) {
 		if val%2 == 0 {
 			isEven = true
