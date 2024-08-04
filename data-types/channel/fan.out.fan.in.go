@@ -60,6 +60,8 @@ func fanInAdd(doneCh chan struct{}, resultChs ...chan int) chan int {
 		}()
 	}
 
+	// This needs to be in another goroutiine because we need to return final channel first
+	// we cant keep on waiting for all add goroutines to finish as it will block finalCh<-data select case
 	go func() {
 		wg.Wait()
 		close(finalCh)

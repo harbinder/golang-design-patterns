@@ -19,8 +19,8 @@ Keep 2 things in mind while embedding wrt promoted fields:
 */
 
 type Container struct {
-	sync.Mutex  // embedded struct (value type)
-	pointerLock *sync.Mutex
+	sync.Mutex                 // embedded struct (value type mutex struct)
+	pointerLock *sync.Mutex    // embedded struct (pointer type mutex struct)
 	counter     map[string]int // (pointer type)
 }
 
@@ -66,9 +66,10 @@ func (c Container) incValueReceiverWithPointerLock(key string) {
 }
 
 func EmbeddingExample() {
-	c := Container{counter: map[string]int{
-		"a": 0, "b": 0,
-	},
+	c := Container{
+		counter: map[string]int{
+			"a": 0, "b": 0,
+		},
 		pointerLock: &sync.Mutex{},
 	}
 
@@ -82,7 +83,7 @@ func EmbeddingExample() {
 	/*
 
 	 */
-	doIncrementNoLock("a") // This will work
+	doIncrementNoLock("a") // This will work, but wrong counter value
 	//go doIncrementNoLock("a") // This will give error -> fatal error: concurrent map writes
 
 	fmt.Println(c.counter)
@@ -94,7 +95,7 @@ func EmbeddingExample() {
 		}
 	}
 
-	doIncrementWithLock("b") // This will work
+	doIncrementWithLock("b") // This will work, but wrong counter value
 	//go doIncrementWithLock("b")  // This will give error -> fatal error: concurrent map writes
 	fmt.Println(c.counter)
 

@@ -39,12 +39,12 @@ There is a caveat with pointer vs value receiver for methods of a concrete type 
 As we know that methods can be implemented as either value or pointer receivers
 
 VALUE RECEIVER - BOTH Pointer & Value Concrete Type
-1. If a concrete type implements all methods of an interface(Method-set) using value receiver,
+1. If a concrete type implements all methods of an interface(Method-set) using VALUE receiver,
 then BOTH value and pointer of that type can be used
 while assigning to that interface variable or while passing to a function which accept an argument as that interface.
 
 POINTER RECEIVER - ONLY Pointer Concrete Type
-2. If a concrete type implements all methods of an interface(Method-set) using pointer receiver,
+2. If a concrete type implements all methods of an interface(Method-set) using POINTER receiver,
 then the ONLY pointer of that type can be used
 while assigning to that interface variable or while passing to a function that accepts an argument as that interface.
 

@@ -16,7 +16,7 @@ type single struct {
 
 var singleInstance *single
 
-var lock = &sync.Mutex{}
+var mu = &sync.Mutex{}
 var once sync.Once
 
 var flagSyncOnce = true
@@ -30,8 +30,8 @@ func getSingleton() *single {
 				},
 			)
 		} else {
-			lock.Lock()
-			defer lock.Unlock()
+			mu.Lock()
+			defer mu.Unlock()
 			if singleInstance == nil {
 				singleInstance = &single{}
 			} else {

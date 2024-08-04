@@ -94,18 +94,18 @@ There are two cases to be considered while using the copy function:
 
 If the length of src is greater than the length of dst, then the number of elements copied is the length of dst
 If the length of dst is greater than the length of src, then the number of elements copied is the length of src
-Basically the number of elements copied is minimum of length of (src, dst).
+Basically the number of elements copied is minimum of length of (src, dst) - min(len(src), len(dst))
 
 ############## Multidimensional Slices #################
 As the multi-dimensional array is an array of arrays, similarly multi-dimensional slice is a slice of slices.
 To understand this, let's first look at the definition of a slice.
 
 Data field in the slice header is a pointer to the underlying array. For a one dimensional slice, we have below declaration
-
 oneDSlice := make([]int, 2)
-To declare a two dimensional slice the declaration would be
 
+To declare a two dimensional slice the declaration would be
 twoDSlice = make([][]int, 2)
+
 Above declaration means that we want to create a slice of 2 slices. Carefully understand this point.
 But wait a second here, we haven't specified the second dimension here, meaning what is the length of each of the inner 2 slices.
 In case of slice, each of the inner slice has to be explicitly intialized like below
@@ -185,6 +185,8 @@ func SliceAppend() {
 	s = append(s, s1...)   // append one slice to another
 	fmt.Printf("%v len: %v  capacity: %v", s, len(s), cap(s))
 	fmt.Println()
+
+	// copy slice to another
 
 }
 

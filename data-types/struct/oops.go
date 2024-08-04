@@ -49,8 +49,8 @@ We have an interface and struct for ANY generic ANIMAL
 
 On similar lines, we have interface & struct each for Aquatic and Non-Aquatic Animals
 
-iAquatic interface : embedding iAnimal
-aquatic struct: embedding animal
+iAquatic interface : embedding iAnimal interface
+aquatic struct: embedding animal struct
 
 iNonAquatic interface : embedding iAnimal
 nonAquatic struct: embedding animal
@@ -72,30 +72,39 @@ type iAnimal interface {
 type animal struct {
 }
 
+// animal struct implements iAnimal interface
 func (a *animal) breathe() {
 	fmt.Println("Animal breate")
 }
 
+// iAquatic interface embedds iAnimal interface
 type iAquatic interface {
 	iAnimal
 	swim()
 }
+
+// aquatic struct embedds animal struct
 type aquatic struct {
 	animal
 }
 
+// aquatic sturct implements iAquatic interface
 func (a *aquatic) swim() {
 	fmt.Println("Aquatic swim")
 }
 
+// iNonAquatic interface embedds iAnimal interface
 type iNonAquatic interface {
 	iAnimal
 	walk()
 }
+
+// nonAquatic struct embedds animal struct
 type nonAquatic struct {
 	animal
 }
 
+// nonAquatic struct implements iNonAquatic interface
 func (a *nonAquatic) walk() {
 	fmt.Println("Non-Aquatic walk")
 }
