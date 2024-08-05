@@ -29,6 +29,7 @@ func main() {
 	// Routes
 	api := app.Group("golang")
 	api.Get("/channel", chanExamples)
+	api.Get("/channel/worker", chanExampleWorker)
 	api.Get("/channel/basics", chanBasicExamples)
 	api.Get("/struct/basics", structExamples)
 	api.Get("/struct/embedding", embeddingExample)
@@ -115,6 +116,10 @@ func chanBasicExamples(c *fiber.Ctx) error {
 	channel.FanOutFanInPattern()
 	channel.SemaphoreExample()
 	return c.SendString("Channel Basics")
+}
+func chanExampleWorker(c *fiber.Ctx) error {
+	channel.InitWork().StartWork()
+	return c.SendString("Channel Example: Worker")
 }
 func chanExamples(c *fiber.Ctx) error {
 	gc := channels.GoChannel{}
